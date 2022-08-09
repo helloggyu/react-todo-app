@@ -1,22 +1,14 @@
 // import  {Component} from "react";
 import "./App.css";
 import  { useState } from 'react';
+import List from "./components/List";
 
 const App=()=>{
-  const [todoData, setTodoData] = useState([
-    {
-      id: 1,
-      title: '공부하기',
-      complete: false,
-    },
-  ]);
+  const [todoData, setTodoData] = useState([]);
 
   const [ todoValue, setTodoValue ]=useState('')
 
-  const handelClick=(id)=>{
-    let newTodoData = todoData.filter(data => data.id!==id );
-    setTodoData(newTodoData);
-  }
+
 
   const handelChange=(v)=>{
     setTodoValue(v)
@@ -31,24 +23,14 @@ const App=()=>{
       complete:false
     }
 
-    setTodoData([...todoData,newTodo]);
+    setTodoData((prev)=>[...prev,newTodo]);
+    setTodoValue("");
   }
   
   
-  const btnStyle = {
-      color:"#fff",
-      border:"none",
-      padding:" 5px 9px",
-      borderRadius: "50%",
-      cursor:"pointer",
-      float:"right",
-  }
+
   
-  const getStyle ={
-    padding:"12px",
-    borderBottom:"1px #ccc dotted",
-    textDecoration:"none"
-  }
+
 
   return (
     <div className="container">
@@ -56,14 +38,9 @@ const App=()=>{
         <div className="titld">
           <h1>할 일 목록</h1>
         </div>
-        {todoData.map(data=>(
-          <div style={getStyle} key={data.id}>
-          <input type="checkbox" defaultChecked={false} /> {data.title}
-          <button style={btnStyle} onClick={()=>handelClick(data.id)}>x</button>
-          </div>
-        ))}
+        <List todoData={todoData} setTodoData={setTodoData}/>
         <form style={{display:'flex'}} onSubmit={(e)=>handelSubmit(e)}>
-          <input type='text' name='value' style={{flex:'10', padding:'10px'}} placeholder='해야 할 일을 입력하세요.' value={todoValue} onChange={(e)=>handelChange(e.target.value)}/>
+          <input type='text' name='value' style={{flex:'10', padding:'10px'}} placeholder='해야 할 일을 입력하세요.' value={todoValue} onChange={(event)=>handelChange(event.target.value)}/>
           <input type="submit" value="입력" className="btn" style={{flex:'1'}}/>
         </form>
       </div>
