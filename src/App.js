@@ -23,9 +23,9 @@ const App=()=>{
   
 
   return (
-    <div className="container">
-      <div className="todoBlock">
-        <div className="titld">
+    <div className="flex items-center justify-center w-screen h-screen bg-teal-50">
+      <div className="w-full p-5 m-4 rounded bg-white shadow lg:w-3/4 lg:max-w-lg">
+        <div className="flex justify-between mb-3">
           <h1>할 일 목록</h1>
         </div>
         <List todoData={todoData} setTodoData={setTodoData}/>
